@@ -1,4 +1,11 @@
---AUTHOR KALI KIMURA
+--AUTHOR: KaliKiu
+
+--vnavmesh : Movement (https://puni.sh/api/repository/veyn)
+--SND (SomethingNeedDoing): (https://love.puni.sh/ment.json)
+--PandorasBox (https://love.puni.sh/ment.json)
+--AutoRetainer (https://love.puni.sh/ment.json)
+--Lifestream (https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/pluginmaster.json)
+
 
 --ITEMS ID + COUNT
 local Tarnished = {
