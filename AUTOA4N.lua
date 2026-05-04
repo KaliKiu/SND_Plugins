@@ -1,5 +1,3 @@
---Author: KaliKiu
-
 
 --PLUGINS NEEDED--
 --vnavmesh : Movement (https://puni.sh/api/repository/veyn)
@@ -11,6 +9,9 @@ local LoopsToRun = 300
 
 local A4N_ID = 115
 local NORMAL = 1
+local Item = {
+    PGS = {ID = 13587, COUNT = 0}
+}
 
 local function SimpleWait(seconds)
     yield("/wait " .. seconds)
@@ -31,6 +32,7 @@ local function Setup()
             break
         end
     end
+    
 end
 
 local function Check()
@@ -72,26 +74,33 @@ end
 local function Fight()
     yield("/rotation manual")
     yield("/vnavmesh moveto -0.0 10.5 -8.4")
-    SimpleWait(2)
+    SimpleWait(1)
+    yield("/tenemy")
+    SimpleWait(1)
+    yield("/tenemy")
+
     local rawTime = InstancedContent.ContentTimeLeft
     local time = math.floor(rawTime)
-    for i = 1, 300 do
+    local prev_count = Inventory.GetItemCount(item.PGS.ID)
+    item.PGS.COUNT = prev_count
+    
+    while prev_count == items.PGS.COUNT do
         yield("/tenemy")
         local target = Entity.Target
         rawTime = InstancedContent.ContentTimeLeft
         time = math.floor(rawTime)
         if (target or time >5365)  then
-            Dalamud.Log("Fighting.. ")
+            KaliLog("Combat..")
         else
-            Dalamud.Log("NoTarget .. EndFight()")
+            KaliLog("NoTarget .. EndFight()")
             break
         end
+        items.PGS.COUNT = Inventory.GetItemCount(item.PGS.ID)
         SimpleWait(NORMAL)
-        if time < 5350 then
-            break
-        end
         KaliLog(time)
     end
+    KaliLog("FightEnd..")
+    SimpleWait(NORMAL)
 end
 
 local function EndFight()
