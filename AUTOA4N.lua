@@ -9,7 +9,7 @@ local LoopsToRun = 300
 
 local A4N_ID = 115
 local NORMAL = 1
-local Item = {
+local item = {
     PGS = {ID = 13587, COUNT = 0}
 }
 
@@ -35,28 +35,6 @@ local function Setup()
     
 end
 
-local function Check()
-    while true do
-        local qs = Instances.DutyFinder.QueueState
-        if not (qs and qs.InConten) then
-             KaliLog("Waiting to enter ..")
-             SimpleWait(NORMAL)
-        else
-            KaliLog("InContent .. start fight")
-            break
-        end
-    end
-    yield("/echo [SND] Timer finished. Cleaning up...")
-    yield("/vnavmesh moveto -2 10.5 -5.5")
-    SimpleWait(1)
-    yield("/vnavmesh moveto 2 10.5 -5.5")
-    SimpleWait(1)
-    yield("/rotation off")
-    SimpleWait(2)
-    yield("/pdfleave") 
-    yield("/echo [SND] Leaving... Waiting for loading screen")
-end
-
 local function Q()
     Setup()
     Instances.DutyFinder:QueueDuty(115)
@@ -67,8 +45,7 @@ local function Q()
     SimpleWait(NORMAL)
     KaliLog("Entering Instance..")
     yield("/pcall ContentsFinderConfirm true 8")
---entering is kinda as.. gotta fix that
-    SimpleWait(10)
+    SimpleWait(4)
 end
 
 local function Fight()
@@ -79,23 +56,21 @@ local function Fight()
     SimpleWait(1)
     yield("/tenemy")
 
-    local rawTime = InstancedContent.ContentTimeLeft
-    local time = math.floor(rawTime)
+    local time = math.floor(InstancedContent.ContentTimeLeft)
     local prev_count = Inventory.GetItemCount(item.PGS.ID)
     item.PGS.COUNT = prev_count
-    
-    while prev_count == items.PGS.COUNT do
+
+    while prev_count == item.PGS.COUNT do
         yield("/tenemy")
         local target = Entity.Target
         rawTime = InstancedContent.ContentTimeLeft
         time = math.floor(rawTime)
         if (target or time >5365)  then
-            KaliLog("Combat..")
         else
-            KaliLog("NoTarget .. EndFight()")
+            KaliLog("FightBuged .. EndFight()")
             break
         end
-        items.PGS.COUNT = Inventory.GetItemCount(item.PGS.ID)
+        item.PGS.COUNT = Inventory.GetItemCount(item.PGS.ID)
         SimpleWait(NORMAL)
         KaliLog(time)
     end
@@ -110,7 +85,7 @@ local function EndFight()
     yield("/vnavmesh moveto 2 10.5 -5.5")
     SimpleWait(NORMAL)
     yield("/rotation off")
-    SimpleWait(3)
+    SimpleWait(NORMAL)
     InstancedContent.LeaveCurrentContent()
 end
 
