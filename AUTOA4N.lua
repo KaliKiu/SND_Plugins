@@ -1,3 +1,12 @@
+--Author: KaliKiu
+
+
+--PLUGINS NEEDED--
+--vnavmesh : Movement (https://puni.sh/api/repository/veyn)
+--SND (SomethingNeedDoing): (https://love.puni.sh/ment.json)
+--RotationSolverReborn : (https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json)
+--PandorasBox (https://love.puni.sh/ment.json)
+
 local LoopsToRun = 300
 
 local A4N_ID = 115
@@ -99,8 +108,9 @@ end
 -- ==========================================
 for i = 1, LoopsToRun do
     Q()
-    KaliLog("RUN " .. LoopsToRun)
+    KaliLog("RUN " .. i)
     Fight()
     EndFight()
+    SimpleWait(5)
 end
 KaliLog("---.FINISHED.---" .. LoopsToRun)
