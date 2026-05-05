@@ -49,18 +49,19 @@ local function Q()
 end
 
 local function Fight()
-    yield("/rotation manual")
     yield("/vnavmesh moveto -0.0 10.5 -8.4")
     SimpleWait(1)
     yield("/tenemy")
     SimpleWait(1)
     yield("/tenemy")
+    yield("/rotation manual")
 
     local time = math.floor(InstancedContent.ContentTimeLeft)
     local prev_count = Inventory.GetItemCount(item.PGS.ID)
     item.PGS.COUNT = prev_count
 
     while prev_count == item.PGS.COUNT do
+        KaliLog(prev_count .. " " .. item.PGS.COUNT)
         yield("/tenemy")
         local target = Entity.Target
         rawTime = InstancedContent.ContentTimeLeft
@@ -85,7 +86,6 @@ local function EndFight()
     yield("/vnavmesh moveto 2 10.5 -5.5")
     SimpleWait(NORMAL)
     yield("/rotation off")
-    SimpleWait(NORMAL)
     InstancedContent.LeaveCurrentContent()
 end
 
