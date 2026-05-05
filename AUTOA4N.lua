@@ -50,9 +50,9 @@ end
 
 local function Fight()
     yield("/vnavmesh moveto -0.0 10.5 -8.4")
-    SimpleWait(1)
+    SimpleWait(NORMAL)
     yield("/tenemy")
-    SimpleWait(1)
+    SimpleWait(NORMAL)
     yield("/tenemy")
     yield("/rotation manual")
 
@@ -63,10 +63,11 @@ local function Fight()
     while prev_count == item.PGS.COUNT do
         KaliLog(prev_count .. " " .. item.PGS.COUNT)
         yield("/tenemy")
+        yield("/rotation manual")
         local target = Entity.Target
         rawTime = InstancedContent.ContentTimeLeft
         time = math.floor(rawTime)
-        if (target or time >5365)  then
+        if (target or time >5350)  then
         else
             KaliLog("FightBuged .. EndFight()")
             break
@@ -80,7 +81,7 @@ local function Fight()
 end
 
 local function EndFight()
-    SimpleWait(2)
+    SimpleWait(NORMAL)
     yield("/vnavmesh moveto -2 10.5 -5.5")
     SimpleWait(NORMAL)
     yield("/vnavmesh moveto 2 10.5 -5.5")
