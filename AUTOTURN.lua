@@ -116,14 +116,13 @@ local function Exchange(index)
 end
 
 local function SetupSerpent()
-    yield("/send ESCAPE")
+    yield("/pcall SelectString true -1")
     SimpleWait(2)
-    yield("/autoretainer deliver")
+    yield("/pcall SelectString true -1")
     SimpleWait(90)
 end
 
 local function RunSeals()
-    yield("/send ESCAPE")
     SimpleWait(2)
     SetupSerpent()
 end
@@ -139,5 +138,3 @@ while(run) do
         RunSeals()
     end
 end
-
-
