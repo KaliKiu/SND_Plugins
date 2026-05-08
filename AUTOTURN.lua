@@ -118,7 +118,7 @@ end
 local function SetupSerpent()
     yield("/pcall SelectString true -1")
     SimpleWait(2)
-    yield("/pcall SelectString true -1")
+    yield("/autoretainer deliver")
     SimpleWait(90)
 end
 
